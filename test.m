@@ -52,4 +52,24 @@ for i = 1:numSamples
     waitfor(rc);
 end
 
-helperPlotJointSpaceTraj("Joint-Space Trajectory and Waypoints", tvec, q, qd, frankaWaypoints,frankaTimepoints);
+%helperPlotJointSpaceTraj("Joint-Space Trajectory and Waypoints", tvec, q, qd, frankaWaypoints,frankaTimepoints);
+
+%% Roboter steuern
+% Connect to the robot
+ipAddress = '192.168.1.11';  % Replace with the actual IP address of your robot
+robot = franka_matlab(ipAddress);
+
+% Set up the initial configuration
+initialConfig = robot.homeConfiguration;
+
+% Move the robot to the initial configuration
+robot.move(initialConfig);
+
+% Execute the joint trajectory on the real robot
+for i = 1:numSamples
+    jointCommand = q(:, i);
+    robot.move(jointCommand);
+end
+
+% Disconnect from the robot
+robot.disconnect();

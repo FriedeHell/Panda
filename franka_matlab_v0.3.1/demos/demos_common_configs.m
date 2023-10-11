@@ -3,7 +3,7 @@
 %  'LICENSE' , which is part of this package
 
 %% Demos variables
-robot_ip = '192.168.1.11'; %place your robot's ip!
+robot_ip = '172.16.0.2'; %place your robot's ip!
 
 q_init = [0, -pi/4, 0, -3 * pi/4, 0, pi/2, pi/4];
 
