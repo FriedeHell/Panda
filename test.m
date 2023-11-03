@@ -48,7 +48,7 @@ figure
 set(gcf,"Visible","on")
 show(robot);
 
-rc = rateControl(sampleRate);
+rc = rateControl(sampleRate); % Stellt sicher, dass Roboter in Abtastfrequenz dargestellt wird. 
 for i = 1:numSamples
     show(robot, q(:,i),FastUpdate=true,PreservePlot=false);
     waitfor(rc);

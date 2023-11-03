@@ -30,8 +30,12 @@ if isempty(kalibrieren_x) || isempty(kalibrieren_y) || isempty(kalibrieren_z) ||
     kalibrieren_winkel_TCP = 0;
 end
 
+
+%% Funktionen %%
+
 % Kalibrierdaten aus dem Matlab Skript in die App laden
 function loadCalibrationData(app, event)
+frankaTimepoints = linspace(tvec(1),tvec(end),4);
 
     % Werte aus der globalen Variable lesen [mm]
     kalibrieren_x = get(globalVar('kalibriren_x'));
@@ -44,6 +48,7 @@ function loadCalibrationData(app, event)
     kalibrieren_winkel_TCP = get (globalVar('kalibrieren_winkel_TCP'));
 
 end
+
 
 % Kalibrierdaten aus der App ins Skript speichern.
 function saveCalibrationData(app, event)
@@ -69,7 +74,12 @@ function saveCalibrationData(app, event)
     kalibrieren_abstand_sicherheit = sicherheit;
     kalibrieren_winkel_TCP = winkel;
 
-    % Globale Variablen in das Skript speichern
-    save(fullfile('CalibrationData.mat'), 'kalibrieren_x', 'kalibrieren_y', 'kalibrieren_z', 'kalibrieren_abstand_TCP');
+    % Globale Variablen in die .mat-Datei sichern. 
+    save(fullfile('CalibrationData.mat'), 'kalibrieren_x', 'kalibrieren_y', ...
+        'kalibrieren_z', 'kalibrieren_abstand_TCP', 'kalibrieren_abstand_messpunkt', ...
+        "kalibrieren_abstand_sicherheit","kalibrieren_winkel_TCP");
 
 end
+
+
+

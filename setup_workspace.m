@@ -1,8 +1,13 @@
 clc;
 clear;
 
-% Import the robot
-% % panda = importrobot('frankaEmikaPanda.urdf');
+% Roboter als Variable importieren
 robot = loadrobot("frankaEmikaPanda",DataFormat="column");
 
+% Load Calibration Data aus der Datei
+load("CalibrationData.mat");
+
 %% Hier sollten noch die Joint Position Limits eingesetzt werden. 
+
+
+%% Globale Grafik für Simulation festlegen
