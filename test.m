@@ -1,3 +1,5 @@
+robot = loadrobot("frankaEmikaPanda",DataFormat="column");
+
 %% Defining Time vector for the trajectories
 tpts = 0:4;
 sampleRate = 20;
@@ -52,4 +54,4 @@ for i = 1:numSamples
     waitfor(rc);
 end
 
-helperPlotJointSpaceTraj("Joint-Space Trajectory and Waypoints", tvec, q, qd, frankaWaypoints,frankaTimepoints);
+%helperPlotJointSpaceTraj("Joint-Space Trajectory and Waypoints", tvec, q, qd, frankaWaypoints,frankaTimepoints);

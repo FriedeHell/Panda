@@ -1,8 +1,6 @@
 clc;
 clear;
 
-
-
 % Import the robot
 % % panda = importrobot('frankaEmikaPanda.urdf');
 robot = loadrobot("frankaEmikaPanda",DataFormat="column");
