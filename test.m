@@ -50,8 +50,31 @@ show(robot);
 
 rc = rateControl(sampleRate); % Stellt sicher, dass Roboter in Abtastfrequenz dargestellt wird. 
 for i = 1:numSamples
-    show(robot, q(:,i),FastUpdate=true,PreservePlot=false);
+    show(robot, q(:,i),FastUpdate==true,PreservePlot=false);
     waitfor(rc);
 end
 
+
 %helperPlotJointSpaceTraj("Joint-Space Trajectory and Waypoints", tvec, q, qd, frankaWaypoints,frankaTimepoints);
+%helperPlotJointSpaceTraj("Joint-Space Trajectory and Waypoints", tvec, q, qd, frankaWaypoints,frankaTimepoints);
+
+
+%% Roboter steuern
+% ... (Your existing code)
+
+
+
+% Connect to the robot
+ipaddress = '192.168.1.11';  % Replace with the actual IP address of your robot
+robot.Connect(ipaddress);
+robot.show()
+
+% Create a joint trajectory object
+jointTraj = trajectory(robot, tvec, q');
+
+% Move the robot
+disp('Moving the robot...');
+send(robot, jointTraj);
+
+% Disconnect from the robot
+robot.Disconnect();
