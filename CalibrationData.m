@@ -33,7 +33,7 @@ end
 
 %% Funktionen %%
 
-% Kalibrierdaten aus dem Matlab Skript in die App laden
+% Load  ||  Kalibrierdaten aus dem Matlab Skript in die App laden
 function loadCalibrationData(app, event)
 frankaTimepoints = linspace(tvec(1),tvec(end),4);
 
@@ -50,7 +50,7 @@ frankaTimepoints = linspace(tvec(1),tvec(end),4);
 end
 
 
-% Kalibrierdaten aus der App ins Skript speichern.
+% Save  ||  Kalibrierdaten aus der App ins Skript speichern.
 function saveCalibrationData(app, event)
 
     % Werte der Eingabefelder lesen

@@ -1,53 +1,29 @@
-% Importieren des Robotermodells
-robot = loadrobot("frankaEmikaPanda",DataFormat="column");
+%% WORKING!!!
 
-% Abfrage, wie viele Punkte angefahren werden sollen
-numPoints = input("Wie viele Punkte möchten Sie anfahren? ");
+%% Defining Time vector for the trajectories
+tpts = 0:4;
+sampleRate = 20;
+tvec = tpts(1):1/sampleRate:tpts(end);
+numSamples = length(tvec);
 
-% Initialisieren der Variablen
-points = [];
-angles = [];
+%% Task-Space Trajectories mit Inverse Kinematics
 
-% Benutzereingaben abfragen
-for i = 1:numPoints
-    disp("Geben Sie den Abstand zum Punkt " + i + " ein: ");
-    distance = inputdlg("");
-    disp("Geben Sie den Winkel zum Punkt " + i + " um die x-Achse ein: ");
-    xAngle = input("");
-    disp("Geben Sie den Winkel zum Punkt " + i + " um die y-Achse ein: ");
-    yAngle = input("");
+% Define the specific point to move to
+targetPose = trvec2tform([1, 0, 0.5])*eul2tform([0, 0, pi/2]);
 
-    % Punkt hinzufügen
-    points = [points [distance, xAngle, yAngle]];
-    angles = [angles [xAngle, yAngle]];
+%% Inverse Kinematics
+rng(0) % Seed the RNG so the inverse kinematics solution is consistent
+ik = inverseKinematics(RigidBodyTree=robot);
+ik.SolverParameters.AllowRandomRestart = false;
 
-    % Bestätigung abfragen
-    disp("Punkt " + i + " hinzugefügt. Bestätigen Sie mit Enter.");
-    pause;
-end
+% Define the weights for the inverse kinematics solver
+weights = [0.2 0.2 0.2 1 1 1]; % Prioritize position over orientation
 
-% Winkel um 0 ergänzen
-angles = [angles, zeros(size(angles, 1), 1)];
+% Define the initial guess for the joint angles
+initialGuess = [0, 0, 0, -pi/2, 0, 0, 0, 0.01, 0.01]'; % Choose an initial guess within the robot joint limits
 
-% Target Pose berechnen
-%R = eul2rotm(angles(:,i));
-%R = [R, zeros(2,1)];
-%R = [R; zeros(1,3)];
-%targetPose = tform2trvec(R);
+% Calculate the inverse kinematics solution
+q = ik("panda_hand",targetPose,weights,initialGuess);
 
-targetPose = transform3d('t', points(:,i)', 'R', eul2rotm(angles(:,i)));
-
-% Inverse Kinematik berechnen
-q = inverseKinematics(RigidBodyTree, robot, 'panda_hand', targetPose);
-
-% Roboter anzeigen
-figure
-set(gcf,"Visible","on")
-show(robot);
-
-% Roboterarm bewegen
-for i = 1:numPoints
-    show(robot, q(:,i),FastUpdate=true,PreservePlot=false);
-    disp("Punkt " + i + " angefahren.");
-    pause;
-end
+%% Show the robot
+show(robot, q,FastUpdate=true,PreservePlot=false);
