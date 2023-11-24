@@ -64,17 +64,17 @@ end
 
 
 
-% Connect to the robot
-ipaddress = '192.168.1.11';  % Replace with the actual IP address of your robot
-robot.Connect(ipaddress);
-robot.show()
-
-% Create a joint trajectory object
-jointTraj = trajectory(robot, tvec, q');
-
-% Move the robot
-disp('Moving the robot...');
-send(robot, jointTraj);
-
-% Disconnect from the robot
-robot.Disconnect();
+% % Connect to the robot
+% ipaddress = '192.168.1.11';  % Replace with the actual IP address of your robot
+% robot.Connect(ipaddress);
+% robot.show()
+% 
+% % Create a joint trajectory object
+% jointTraj = trajectory(robot, tvec, q');
+% 
+% % Move the robot
+% disp('Moving the robot...');
+% send(robot, jointTraj);
+% 
+% % Disconnect from the robot
+% robot.Disconnect();

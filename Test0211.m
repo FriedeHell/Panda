@@ -9,7 +9,7 @@ numSamples = length(tvec);
 %% Task-Space Trajectories mit Inverse Kinematics
 
 % Define the specific point to move to
-targetPose = trvec2tform([1, 0, 0.5])*eul2tform([0, 0, pi/2]);
+targetPose = trvec2tform([1, 0, 0])*eul2tform([0, 0, pi/2]);
 
 %% Inverse Kinematics
 rng(0) % Seed the RNG so the inverse kinematics solution is consistent
