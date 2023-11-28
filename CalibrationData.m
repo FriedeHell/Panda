@@ -1,3 +1,16 @@
+% Copyright (C) 2023 All rights reserved.
+% Author:     Friedemann Heller
+%
+% Date:        Nov, 30 2023
+%
+% -------------------------------------------------
+% CalibrationData
+% Franka Emika Robot
+% -------------------------------------------------
+%
+% the following code has been tested in Matlab 2023a
+
+
 %% Globale Variablen Koordinaten erstellen
 global kalibrieren_x
 global kalibrieren_y
@@ -80,6 +93,3 @@ function saveCalibrationData(app, event)
         "kalibrieren_abstand_sicherheit","kalibrieren_winkel_TCP");
 
 end
-
-
-
