@@ -44,3 +44,4 @@ for i = 1:numSamples
     show(robot, q(:,i),FastUpdate=true,PreservePlot=false);
     waitfor(rc);
 end
+
